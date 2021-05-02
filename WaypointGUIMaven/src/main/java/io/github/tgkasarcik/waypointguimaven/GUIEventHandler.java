@@ -107,6 +107,7 @@ public class GUIEventHandler implements Listener {
 					String z = Double.toString(loc.getZ());
 					player.sendMessage(
 							ChatColor.GOLD + "Waypoint " + locName + " located at " + x + ", " + y + ", " + z);
+					player.closeInventory();
 
 				}
 

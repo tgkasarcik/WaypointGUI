@@ -1,12 +1,12 @@
 package io.github.tgkasarcik.waypointguimaven;
 
-import org.bukkit.Material;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -24,6 +24,13 @@ public class GUIEventHandler implements Listener {
 	 */
 	@SuppressWarnings("unused")
 	private final WaypointGUI plugin;
+
+	// TODO: make this configurable from config.yml
+	/**
+	 * Boolean variable to store whether teleportation is allowed from within the
+	 * WaypointGUI menu.
+	 */
+	private static boolean teleportationEnabled = true;
 
 	/**
 	 * Default constructor
@@ -80,6 +87,37 @@ public class GUIEventHandler implements Listener {
 			 */
 		} else {
 			// teleport player to specified location
+
+			ClickType click = event.getClick();
+			String locName = event.getCurrentItem().getItemMeta().getDisplayName();
+
+			switch (click) {
+
+			case LEFT: {
+				// teleport or show coords
+
+				Location loc = WaypointManager.getWaypoint(player, locName);
+
+				if (teleportationEnabled) {
+					player.teleport(loc);
+				} else {
+					String x = Double.toString(loc.getX());
+					String y = Double.toString(loc.getY());
+					String z = Double.toString(loc.getZ());
+					player.sendMessage(
+							ChatColor.GOLD + "Waypoint " + locName + " located at " + x + ", " + y + ", " + z);
+					
+
+				}
+				
+				break;
+			}
+			default: {
+				break;
+			}
+
+			}
+
 		}
 	}
 

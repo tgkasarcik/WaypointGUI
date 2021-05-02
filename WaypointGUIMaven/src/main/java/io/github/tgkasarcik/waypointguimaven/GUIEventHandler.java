@@ -88,7 +88,7 @@ public class GUIEventHandler implements Listener {
 			ClickType click = event.getClick();
 			String locName = ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName());
 			Location loc = WaypointManager.getWaypoint(player, locName);
-			
+
 			switch (click) {
 
 			/*
@@ -97,7 +97,7 @@ public class GUIEventHandler implements Listener {
 			 * the configuration of the plugin.
 			 */
 			case LEFT:
-				//TODO make messages look better
+				// TODO make messages look better
 				if (teleportationEnabled) {
 					player.teleport(loc);
 					player.sendMessage(ChatColor.GOLD + "Teleported to Waypoint " + locName + "!");
@@ -110,13 +110,11 @@ public class GUIEventHandler implements Listener {
 					player.closeInventory();
 				}
 				break;
-				
+
 			case MIDDLE:
-				//update waypoint location to new location
-				
-				//remove old waypoint from data structure
-				//create a new waypoint with same name at new location
-				
+				WaypointManager.updateWaypoint(player, locName, player.getLocation());
+				player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + locName);
+				player.closeInventory();
 				break;
 			default:
 				break;

@@ -82,22 +82,22 @@ public class GUIEventHandler implements Listener {
 					+ ChatColor.RESET + " to create a new Waypoint!");
 
 			/*
-			 * Teleport player to waypoint or send message containing waypoint's coords,
-			 * depending on config.
+			 * Do specified action according to type of click for the selected block.
 			 */
 		} else {
-			// teleport player to specified location
-
 			ClickType click = event.getClick();
 			String locName = ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName());
-
+			Location loc = WaypointManager.getWaypoint(player, locName);
+			
 			switch (click) {
 
-			case LEFT: {
-				// teleport or show coords
-
-				Location loc = WaypointManager.getWaypoint(player, locName);
-
+			/*
+			 * On left click either teleport player to specified Waypoint, or send player a
+			 * message containing the coordinates of the specified Waypoint, depending on
+			 * the configuration of the plugin.
+			 */
+			case LEFT:
+				//TODO make messages look better
 				if (teleportationEnabled) {
 					player.teleport(loc);
 					player.sendMessage(ChatColor.GOLD + "Teleported to Waypoint " + locName + "!");
@@ -108,14 +108,18 @@ public class GUIEventHandler implements Listener {
 					player.sendMessage(
 							ChatColor.GOLD + "Waypoint " + locName + " located at " + x + ", " + y + ", " + z);
 					player.closeInventory();
-
 				}
-
 				break;
-			}
-			default: {
+				
+			case MIDDLE:
+				//update waypoint location to new location
+				
+				//remove old waypoint
+				//create a new waypoint with same name at new location
+				
 				break;
-			}
+			default:
+				break;
 
 			}
 

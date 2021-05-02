@@ -116,7 +116,7 @@ public class WaypointManager {
 		if (waypointMap.containsKey(u)) {
 			if (waypointMap.get(u).containsKey(waypointName)) {
 				waypoint = waypointMap.get(u).get(waypointName);
-			} 
+			}
 		}
 
 		return waypoint;
@@ -168,6 +168,25 @@ public class WaypointManager {
 
 		guiMap.put(p.getUniqueId(), localGUI);
 		return availSlot;
+	}
+
+	/**
+	 * Updates the Waypoint specified by {@code waypointName} for the specified
+	 * player to the new location specified by {@code newLocation}, or creates a new
+	 * waypoint at that location if one does not already exist.
+	 * 
+	 * @param p            the specified player
+	 * @param waypointName specified waypoint name
+	 * @param newLocation  location to update waypoint to
+	 */
+	public static void updateWaypoint(Player p, String waypointName, Location newLocation) {
+		UUID u = p.getUniqueId();
+		if (waypointMap.containsKey(u)) {
+			if (waypointMap.get(u).containsKey(waypointName)) {
+				waypointMap.get(u).remove(waypointName);
+			}
+		}
+		waypointMap.get(u).put(waypointName, newLocation);
 	}
 
 	/**

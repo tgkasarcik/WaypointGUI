@@ -30,7 +30,7 @@ public class GUIEventHandler implements Listener {
 	 * Boolean variable to store whether teleportation is allowed from within the
 	 * WaypointGUI menu.
 	 */
-	private static boolean teleportationEnabled = true;
+	private static boolean teleportationEnabled = false;
 
 	/**
 	 * Default constructor
@@ -102,9 +102,9 @@ public class GUIEventHandler implements Listener {
 					player.teleport(loc);
 					player.sendMessage(ChatColor.GOLD + "Teleported to Waypoint " + locName + "!");
 				} else {
-					String x = Double.toString(loc.getX());
-					String y = Double.toString(loc.getY());
-					String z = Double.toString(loc.getZ());
+					String x = Integer.toString(loc.getBlockX());
+					String y = Integer.toString(loc.getBlockY());
+					String z = Integer.toString(loc.getBlockZ());
 					player.sendMessage(
 							ChatColor.GOLD + "Waypoint " + locName + " located at " + x + ", " + y + ", " + z);
 					player.closeInventory();

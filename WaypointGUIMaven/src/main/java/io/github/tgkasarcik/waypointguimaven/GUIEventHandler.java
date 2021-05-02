@@ -114,7 +114,7 @@ public class GUIEventHandler implements Listener {
 			case MIDDLE:
 				//update waypoint location to new location
 				
-				//remove old waypoint
+				//remove old waypoint from data structure
 				//create a new waypoint with same name at new location
 				
 				break;

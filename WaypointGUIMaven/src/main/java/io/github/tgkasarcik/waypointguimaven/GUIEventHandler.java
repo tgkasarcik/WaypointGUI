@@ -30,7 +30,7 @@ public class GUIEventHandler implements Listener {
 	 * Boolean variable to store whether teleportation is allowed from within the
 	 * WaypointGUI menu.
 	 */
-	private static boolean teleportationEnabled = false;
+	private static boolean teleportationEnabled = true;
 
 	/**
 	 * Default constructor

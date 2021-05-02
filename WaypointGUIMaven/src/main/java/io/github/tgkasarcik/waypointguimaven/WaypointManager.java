@@ -190,6 +190,33 @@ public class WaypointManager {
 	}
 
 	/**
+	 * Changes the name of the Waypoint 
+	 * @param p
+	 * @param oldName
+	 * @param newName
+	 */
+	public static void renameWaypoint(Player p, String oldName, String newName) {
+		Location loc = null;
+		UUID u = p.getUniqueId();
+		if (waypointMap.containsKey(u)) {
+			if (waypointMap.get(u).containsKey(oldName)) {
+				loc = waypointMap.get(u).remove(oldName);
+			}
+		}
+		if (!loc.equals(null)) {
+			waypointMap.get(u).put(newName, loc);
+		}
+		
+		//change the item to have the correct name
+		GUI1 gui = guiMap.get(u);
+		for (ItemStack item : gui.inventory()) {
+			if (item.getItemMeta().getDisplayName().contains(oldName)) {
+				
+			}
+		}
+	}
+
+	/**
 	 * Returns a {@code List} containing the set of the specified player's Waypoint
 	 * names.
 	 * 

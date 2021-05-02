@@ -89,7 +89,7 @@ public class GUIEventHandler implements Listener {
 			// teleport player to specified location
 
 			ClickType click = event.getClick();
-			String locName = event.getCurrentItem().getItemMeta().getDisplayName();
+			String locName = ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName());
 
 			switch (click) {
 
@@ -100,16 +100,16 @@ public class GUIEventHandler implements Listener {
 
 				if (teleportationEnabled) {
 					player.teleport(loc);
+					player.sendMessage(ChatColor.GOLD + "Teleported to Waypoint " + locName + "!");
 				} else {
 					String x = Double.toString(loc.getX());
 					String y = Double.toString(loc.getY());
 					String z = Double.toString(loc.getZ());
 					player.sendMessage(
 							ChatColor.GOLD + "Waypoint " + locName + " located at " + x + ", " + y + ", " + z);
-					
 
 				}
-				
+
 				break;
 			}
 			default: {

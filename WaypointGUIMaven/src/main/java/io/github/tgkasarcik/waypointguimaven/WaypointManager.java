@@ -110,13 +110,13 @@ public class WaypointManager {
 	 */
 	public static Location getWaypoint(Player p, String waypointName) {
 
-		Location waypoint = new Location(null, 0, 0, 0, 0, 0);
+		Location waypoint = null;
 		UUID u = p.getUniqueId();
 
 		if (waypointMap.containsKey(u)) {
 			if (waypointMap.get(u).containsKey(waypointName)) {
 				waypoint = waypointMap.get(u).get(waypointName);
-			}
+			} 
 		}
 
 		return waypoint;

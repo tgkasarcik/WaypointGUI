@@ -117,19 +117,18 @@ public class GUIEventHandler implements Listener {
 			 */
 			case MIDDLE:
 				WaypointManager.updateWaypoint(player, locName, player.getLocation());
-				player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + locName);
+				player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + locName + "!");
 				player.closeInventory();
 				break;
-				
-			case RIGHT: 
-				//change block
-				
-				
-				//TEST 
-				
+
+			case RIGHT:
+				// change block
+
+				// TEST
+
 				player.sendMessage("" + WaypointManager.getGUI(player).indexOf(locName));
 				player.closeInventory();
-				
+
 				break;
 			default:
 				break;

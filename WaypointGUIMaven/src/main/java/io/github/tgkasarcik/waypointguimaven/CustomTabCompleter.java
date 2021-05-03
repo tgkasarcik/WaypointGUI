@@ -33,14 +33,16 @@ public class CustomTabCompleter implements TabCompleter {
 				arguments.add("create");
 				arguments.add("update");
 				arguments.add("delete");
+				arguments.add("rename");
 				return arguments;
 			}
 
 			/*
-			 * List player's waypoints as option for second arg. when they enter "update" or
-			 * "delete" for first arg.
+			 * List player's waypoints as option for second arg. when they enter "update", 
+			 * "delete", or "rename" for first arg.
 			 */
-			if (args.length == 2 && (args[0].equalsIgnoreCase("update") || args[0].equalsIgnoreCase("delete"))) {
+			if (args.length == 2 && (args[0].equalsIgnoreCase("update") || args[0].equalsIgnoreCase("delete")
+					|| args[0].equalsIgnoreCase("rename"))) {
 				return WaypointManager.locationList((Player) sender);
 			}
 		}

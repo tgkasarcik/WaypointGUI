@@ -32,6 +32,15 @@ public interface CustomGUI {
 	int size();
 
 	/**
+	 * Returns the index of the {@code ItemStack} with the name {@code itemName} in
+	 * {@code this}, or -1 if it does not exist.
+	 * 
+	 * @param itemName Name of item to get index of
+	 * @return index of specified item or -1
+	 */
+	int indexOf(String itemName);
+
+	/**
 	 * Returns the {@code Inventory} object upon which {@code this} is built.
 	 * 
 	 * @return

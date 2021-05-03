@@ -134,6 +134,20 @@ public class GUI1 implements CustomGUISecondary {
 	public int size() {
 		return this.inv.getSize();
 	}
+	
+	@Override
+	public int indexOf(String itemName) {
+		int index = -1;
+		for (int i = 0; i < this.inv.getSize(); i++) {
+			ItemStack currItem = this.inv.getItem(i);
+			String currName = ChatColor.stripColor(currItem.getItemMeta().getDisplayName());
+			if (currName.equalsIgnoreCase(itemName)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
 
 	@Override
 	public Inventory inventory() {

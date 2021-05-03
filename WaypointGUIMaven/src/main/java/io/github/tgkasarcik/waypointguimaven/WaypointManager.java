@@ -207,6 +207,7 @@ public class WaypointManager {
 		
 		ItemStack newItem = createItem(oldMaterial, newName);
 		gui.setItem(index, newItem);
+		guiMap.put(u, gui);
 
 	}
 

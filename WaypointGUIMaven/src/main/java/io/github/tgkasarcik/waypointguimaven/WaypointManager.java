@@ -147,15 +147,7 @@ public class WaypointManager {
 			/*
 			 * Create block and put it in GUI.
 			 */
-			ItemStack block = new ItemStack(Material.GRASS_BLOCK); // TODO: change this to something else??
-			ItemMeta meta = block.getItemMeta();
-			meta.setDisplayName(ChatColor.RESET + "" + ChatColor.BOLD + name);
-			List<String> lore = new ArrayList<>();
-			lore.add(ChatColor.GOLD + "Left Click To Travel");
-			lore.add(ChatColor.GOLD + "Middle Click To Update to Current Location");
-			lore.add(ChatColor.GOLD + "Right Click To Edit Block");
-			meta.setLore(lore);
-			block.setItemMeta(meta);
+			ItemStack block = createItem(Material.GRASS_BLOCK, name);
 			localGUI.setItem(index, block);
 
 			/*
@@ -190,7 +182,8 @@ public class WaypointManager {
 	}
 
 	/**
-	 * Changes the name of the Waypoint 
+	 * Changes the name of the Waypoint
+	 * 
 	 * @param p
 	 * @param oldName
 	 * @param newName
@@ -206,14 +199,15 @@ public class WaypointManager {
 		if (!loc.equals(null)) {
 			waypointMap.get(u).put(newName, loc);
 		}
+
+		// change the item to have the correct name
+		GUI1 gui = guiMap.remove(u);
+		int index = gui.indexOf(oldName);
+		Material oldMaterial = gui.item(index).getType();
 		
-		//change the item to have the correct name
-		GUI1 gui = guiMap.get(u);
-		for (ItemStack item : gui.inventory()) {
-			if (item.getItemMeta().getDisplayName().contains(oldName)) {
-				
-			}
-		}
+		ItemStack newItem = createItem(oldMaterial, newName);
+		gui.setItem(index, newItem);
+
 	}
 
 	/**
@@ -225,6 +219,31 @@ public class WaypointManager {
 	 */
 	public static List<String> locationList(Player p) {
 		return new ArrayList<String>(waypointMap.get(p.getUniqueId()).keySet());
+	}
+
+	/*
+	 * Private helper methods -------------------------------------------------
+	 */
+
+	/**
+	 * Creates an {@code ItemStack} object with the specified {@code Material} and
+	 * {@code displayName}.
+	 * 
+	 * @param material    The specified material
+	 * @param displayName The specified display name
+	 * @return The created ItemStack object
+	 */
+	private static ItemStack createItem(Material material, String displayName) {
+		ItemStack block = new ItemStack(material); // TODO: change this to something else??
+		ItemMeta meta = block.getItemMeta();
+		meta.setDisplayName(ChatColor.RESET + "" + ChatColor.BOLD + displayName);
+		List<String> lore = new ArrayList<>();
+		lore.add(ChatColor.GOLD + "Left Click To Travel");
+		lore.add(ChatColor.GOLD + "Middle Click To Update to Current Location");
+		lore.add(ChatColor.GOLD + "Right Click To Edit Block");
+		meta.setLore(lore);
+		block.setItemMeta(meta);
+		return block;
 	}
 
 }

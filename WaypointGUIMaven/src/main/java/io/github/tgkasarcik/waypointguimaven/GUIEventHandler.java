@@ -111,10 +111,25 @@ public class GUIEventHandler implements Listener {
 				}
 				break;
 
+			/*
+			 * On middle click, update the specified Waypoint location to {@code player}'s
+			 * current location.
+			 */
 			case MIDDLE:
 				WaypointManager.updateWaypoint(player, locName, player.getLocation());
 				player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + locName);
 				player.closeInventory();
+				break;
+				
+			case RIGHT: 
+				//change block
+				
+				
+				//TEST 
+				
+				player.sendMessage("" + WaypointManager.getGUI(player).indexOf(locName));
+				player.closeInventory();
+				
 				break;
 			default:
 				break;

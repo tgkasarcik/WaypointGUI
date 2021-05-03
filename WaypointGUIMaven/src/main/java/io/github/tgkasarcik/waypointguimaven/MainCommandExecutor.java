@@ -78,8 +78,15 @@ public class MainCommandExecutor implements CommandExecutor {
 					 * Update the specifed waypoint to player's current location.
 					 */
 					if (args[0].equalsIgnoreCase("update")) {
-						WaypointManager.updateWaypoint(player, args[1], player.getLocation());
-						player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + args[1] + "!");
+						if (WaypointManager.locationList(player).contains(args[1])) {
+							WaypointManager.updateWaypoint(player, args[1], player.getLocation());
+							player.sendMessage(
+									ChatColor.GOLD + "Successfully updated location of Waypoint " + args[1] + "!");
+						} else {
+							player.sendMessage(ChatColor.RED + "Error: Waypoint " + ChatColor.AQUA + args[1]
+									+ ChatColor.RED + " does not exist!");
+						}
+
 					}
 
 					/*
@@ -87,7 +94,13 @@ public class MainCommandExecutor implements CommandExecutor {
 					 */
 					if (args[0].equalsIgnoreCase("delete")) {
 						// TODO: implement this
-						// delete existing waypoint
+						if (WaypointManager.locationList(player).contains(args[1])) {
+							//code goes here
+							player.sendMessage(ChatColor.GOLD + "Deleted Waypoint " + args[1] + "!");
+						} else {
+							player.sendMessage(ChatColor.RED + "Error: Waypoint " + ChatColor.AQUA + args[1]
+									+ ChatColor.RED + " does not exist!");
+						}
 						player.sendMessage("This will delete an existing waypoint in the future!");
 					}
 
@@ -98,8 +111,13 @@ public class MainCommandExecutor implements CommandExecutor {
 					 * {@code args[2]}.
 					 */
 					if (args[0].equalsIgnoreCase("rename")) {
-						WaypointManager.renameWaypoint(player, args[1], args[2]);
-						player.sendMessage(ChatColor.GOLD + "Renamed Waypoint " + args[1] + " to " + args[2] + "!");
+						if (WaypointManager.locationList(player).contains(args[1])) {
+							WaypointManager.renameWaypoint(player, args[1], args[2]);
+							player.sendMessage(ChatColor.GOLD + "Renamed Waypoint " + args[1] + " to " + args[2] + "!");
+						} else {
+							player.sendMessage(ChatColor.RED + "Error: Waypoint " + ChatColor.AQUA + args[1]
+									+ ChatColor.RED + " does not exist!");
+						}
 					}
 
 				} else {

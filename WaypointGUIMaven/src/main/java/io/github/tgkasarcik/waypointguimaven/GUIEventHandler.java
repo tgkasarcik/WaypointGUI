@@ -1,12 +1,14 @@
 package io.github.tgkasarcik.waypointguimaven;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -126,7 +128,9 @@ public class GUIEventHandler implements Listener {
 
 				// TEST
 
-				player.sendMessage("" + WaypointManager.getGUI(player).indexOf(locName));
+				ItemStack item = event.getCurrentItem();
+				Material material = item.getType();
+				player.sendMessage(material.name());
 				player.closeInventory();
 
 				break;

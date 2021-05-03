@@ -1,3 +1,4 @@
+
 package io.github.tgkasarcik.waypointguimaven;
 
 import org.bukkit.command.Command;
@@ -62,7 +63,7 @@ public class MainCommandExecutor implements CommandExecutor {
 					 */
 					if (args[0].equalsIgnoreCase("create")) {
 
-						//TODO: tidy up messages
+						// TODO: tidy up messages
 						if (WaypointManager.createWaypoint(player, player.getLocation(), args[1])) {
 							player.sendMessage("Waypoint " + args[1] + " created successfully!");
 						} else {
@@ -87,6 +88,16 @@ public class MainCommandExecutor implements CommandExecutor {
 						// TODO: implement this
 						// delete existing waypoint
 						player.sendMessage("This will delete an existing waypoint in the future!");
+					}
+
+				} else if (args.length == 3) {
+
+					/*
+					 * Rename the Waypoint specified by {@code args[1]} to the new name specified by
+					 * {@code args[2]}.
+					 */
+					if (args[0].equalsIgnoreCase("rename")) {
+						WaypointManager.renameWaypoint(player, args[1], args[2]);
 					}
 
 				} else {

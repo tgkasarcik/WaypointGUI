@@ -100,7 +100,7 @@ public class MainCommandExecutor implements CommandExecutor {
 					 */
 					if (args[0].equalsIgnoreCase("rename")) {
 						WaypointManager.renameWaypoint(player, args[1], args[2]);
-						player.sendMessage(ChatColor.GOLD + "Renamed Waypoint " + args[1] + " to " + args[2]);
+						player.sendMessage(ChatColor.GOLD + "Renamed Waypoint " + args[1] + " to " + args[2] + "!");
 					}
 
 				} else {

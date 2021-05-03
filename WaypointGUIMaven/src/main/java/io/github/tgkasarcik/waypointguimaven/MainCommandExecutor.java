@@ -78,9 +78,8 @@ public class MainCommandExecutor implements CommandExecutor {
 					 * Update the specifed waypoint to player's current location.
 					 */
 					if (args[0].equalsIgnoreCase("update")) {
-						// TODO: implement this
-						// update existing waypoint
-						player.sendMessage("This will update an existing waypoint in the future!");
+						WaypointManager.updateWaypoint(player, args[1], player.getLocation());
+						player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + args[1] + "!");
 					}
 
 					/*

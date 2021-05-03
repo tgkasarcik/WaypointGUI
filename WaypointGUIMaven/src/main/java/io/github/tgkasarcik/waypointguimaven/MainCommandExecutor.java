@@ -6,6 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.ChatColor;
+
 /**
  * Class implementing {@code CommandExecutor} interface to handle command
  * execution for instances of {@code WaypointGUI}.
@@ -98,6 +100,7 @@ public class MainCommandExecutor implements CommandExecutor {
 					 */
 					if (args[0].equalsIgnoreCase("rename")) {
 						WaypointManager.renameWaypoint(player, args[1], args[2]);
+						player.sendMessage(ChatColor.GOLD + "Renamed Waypoint " + args[1] + " to " + args[2]);
 					}
 
 				} else {

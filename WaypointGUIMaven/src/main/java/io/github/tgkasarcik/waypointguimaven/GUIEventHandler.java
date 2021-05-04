@@ -128,9 +128,7 @@ public class GUIEventHandler implements Listener {
 
 				// TEST
 
-				ItemStack item = event.getCurrentItem();
-				Material material = item.getType();
-				player.sendMessage(material.name());
+				WaypointManager.getGUI(player).rename("test");
 				player.closeInventory();
 
 				break;

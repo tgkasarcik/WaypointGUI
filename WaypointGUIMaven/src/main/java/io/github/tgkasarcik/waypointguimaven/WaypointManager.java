@@ -134,7 +134,7 @@ public class WaypointManager {
 	public static boolean createWaypoint(Player p, Location loc, String name) {
 
 		boolean availSlot = false;
-		GUI1 localGUI = (GUI1) guiMap.remove(p.getUniqueId());
+		GUI1 localGUI = (GUI1) getGUI(p);
 
 		/*
 		 * Determine if GUI has any open slots. If it does, fill the first empty and

@@ -131,10 +131,17 @@ public class GUI1 implements CustomGUISecondary {
 	}
 
 	@Override
+	public void rename(String newName) {
+		Inventory newInv = Bukkit.createInventory(this.player, this.inv.getSize(), newName);
+		newInv.setContents(this.inv.getContents());
+		this.inv = newInv;
+	}
+
+	@Override
 	public int size() {
 		return this.inv.getSize();
 	}
-	
+
 	@Override
 	public int indexOf(String itemName) {
 		int index = -1;
@@ -153,7 +160,7 @@ public class GUI1 implements CustomGUISecondary {
 	public Inventory inventory() {
 		return this.inv;
 	}
-	
+
 	@Override
 	public ItemStack item(int index) {
 		return this.inv.getItem(index);
@@ -166,7 +173,6 @@ public class GUI1 implements CustomGUISecondary {
 	@Override
 	public void advanceItem(int index) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/*

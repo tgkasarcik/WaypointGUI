@@ -27,6 +27,13 @@ public interface CustomGUI {
 	void display();
 
 	/**
+	 * Renames {@code this} to the name specified by {@code newName}.
+	 * 
+	 * @param newName spcified new name.
+	 */
+	void rename(String newName);
+
+	/**
 	 * Returns the size of {@code this}.
 	 */
 	int size();

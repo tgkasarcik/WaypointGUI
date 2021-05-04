@@ -11,13 +11,6 @@ import org.bukkit.inventory.ItemStack;
 public abstract interface CustomGUISecondary extends CustomGUI {
 
 	/**
-	 * Advances the item at {@code index} to the next item.
-	 * 
-	 * @param index index of the item to advance
-	 */
-	void advanceItem(int index);
-
-	/**
 	 * Sets first (|this| - 1) slots in {@code this} to be {@code defaultItem} and
 	 * the last to be {@code exitButton}.
 	 * 

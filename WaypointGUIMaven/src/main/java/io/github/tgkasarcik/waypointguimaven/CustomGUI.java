@@ -29,7 +29,7 @@ public interface CustomGUI {
 	/**
 	 * Renames {@code this} to the name specified by {@code newName}.
 	 * 
-	 * @param newName spcified new name.
+	 * @param newName specified new name.
 	 */
 	void rename(String newName);
 

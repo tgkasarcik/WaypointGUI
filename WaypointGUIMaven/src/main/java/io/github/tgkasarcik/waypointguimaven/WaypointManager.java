@@ -200,7 +200,6 @@ public class WaypointManager {
 			waypointMap.get(u).put(newName, loc);
 		}
 
-		// change the item to have the correct name
 		GUI1 gui = guiMap.remove(u);
 		int index = gui.indexOf(oldName);
 		Material oldMaterial = gui.item(index).getType();
@@ -231,7 +230,7 @@ public class WaypointManager {
 	 * @return The created ItemStack object
 	 */
 	public static ItemStack createItem(Material material, String displayName) {
-		ItemStack block = new ItemStack(material); // TODO: change this to something else??
+		ItemStack block = new ItemStack(material);
 		ItemMeta meta = block.getItemMeta();
 		meta.setDisplayName(ChatColor.RESET + "" + ChatColor.BOLD + displayName);
 		List<String> lore = new ArrayList<>();

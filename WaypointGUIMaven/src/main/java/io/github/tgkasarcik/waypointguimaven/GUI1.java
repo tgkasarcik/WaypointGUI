@@ -142,6 +142,7 @@ public class GUI1 implements CustomGUISecondary {
 	public void rename(String newName) {
 		Inventory newInv = Bukkit.createInventory(this.player, this.inv.getSize(), newName);
 		newInv.setContents(this.inv.getContents());
+		this.inv.clear();
 		this.inv = newInv;
 	}
 

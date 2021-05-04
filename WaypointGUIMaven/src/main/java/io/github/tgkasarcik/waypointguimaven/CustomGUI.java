@@ -32,6 +32,13 @@ public interface CustomGUI {
 	 * @param newName specified new name.
 	 */
 	void rename(String newName);
+	
+	/**
+	 * Advances the item at {@code index} to the next item.
+	 * 
+	 * @param index index of the item to advance
+	 */
+	void advanceItem(int index);
 
 	/**
 	 * Returns the size of {@code this}.

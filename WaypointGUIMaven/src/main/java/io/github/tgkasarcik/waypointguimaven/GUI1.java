@@ -43,7 +43,7 @@ public class GUI1 implements CustomGUISecondary {
 	 * ItemStack List to hold all items that are allowed to populate inventory slots
 	 * in GUI.
 	 */
-	private List<ItemStack> allowedItems;
+	private static List<ItemStack> allowedItems;
 
 	/**
 	 * Player that owns {@code Inventory} used to represent {@code this}.
@@ -78,6 +78,17 @@ public class GUI1 implements CustomGUISecondary {
 		meta = GUI1.EXIT_BUTTON.getItemMeta();
 		meta.setDisplayName(ChatColor.RESET + "" + ChatColor.RED + "" + ChatColor.BOLD + "Exit");
 		GUI1.EXIT_BUTTON.setItemMeta(meta);
+
+		/*
+		 * Initialize {@code allowedItems}
+		 */
+		allowedItems = new LinkedList<ItemStack>();
+		// TODO: change this to load from config.yml
+		allowedItems.add(new ItemStack(Material.GRASS_BLOCK));
+		allowedItems.add(new ItemStack(Material.STONE));
+		allowedItems.add(new ItemStack(Material.SAND));
+		allowedItems.add(new ItemStack(Material.ICE));
+		allowedItems.add(new ItemStack(Material.TERRACOTTA));
 	}
 
 	/**
@@ -138,6 +149,17 @@ public class GUI1 implements CustomGUISecondary {
 	}
 
 	@Override
+	public void advanceItem(int index) {
+		ItemStack currItem = this.inv.getItem(index);
+		int listIndex = allowedItems.indexOf(currItem);
+		listIndex++;
+		if (listIndex >= allowedItems.size()) {
+			listIndex = 0;
+		}
+		this.inv.setItem(index, allowedItems.get(listIndex));
+	}
+
+	@Override
 	public int size() {
 		return this.inv.getSize();
 	}
@@ -164,15 +186,6 @@ public class GUI1 implements CustomGUISecondary {
 	@Override
 	public ItemStack item(int index) {
 		return this.inv.getItem(index);
-	}
-
-	/*
-	 * Secondary Methods ------------------------------------------------------
-	 */
-
-	@Override
-	public void advanceItem(int index) {
-		// TODO Auto-generated method stub
 	}
 
 	/*

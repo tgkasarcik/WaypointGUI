@@ -43,7 +43,7 @@ public class GUI1 implements CustomGUISecondary {
 	 * ItemStack List to hold all items that are allowed to populate inventory slots
 	 * in GUI.
 	 */
-	private static List<ItemStack> allowedItems;
+	private static List<Material> allowedItems;
 
 	/**
 	 * Player that owns {@code Inventory} used to represent {@code this}.
@@ -82,13 +82,13 @@ public class GUI1 implements CustomGUISecondary {
 		/*
 		 * Initialize {@code allowedItems}
 		 */
-		allowedItems = new LinkedList<ItemStack>();
+		allowedItems = new ArrayList<Material>();
 		// TODO: change this to load from config.yml
-		allowedItems.add(new ItemStack(Material.GRASS_BLOCK));
-		allowedItems.add(new ItemStack(Material.STONE));
-		allowedItems.add(new ItemStack(Material.SAND));
-		allowedItems.add(new ItemStack(Material.ICE));
-		allowedItems.add(new ItemStack(Material.TERRACOTTA));
+		allowedItems.add(Material.GRASS_BLOCK);
+		allowedItems.add(Material.STONE);
+		allowedItems.add(Material.SAND);
+		allowedItems.add(Material.ICE);
+		allowedItems.add(Material.TERRACOTTA);
 	}
 
 	/**
@@ -96,7 +96,6 @@ public class GUI1 implements CustomGUISecondary {
 	 */
 	public GUI1() {
 		this.inv = Bukkit.createInventory(null, DEFAULT_SIZE);
-		this.allowedItems = new LinkedList<ItemStack>();
 		this.player = null;
 		this.initializeItems(EMPTY_SLOT_ITEM, EXIT_BUTTON);
 	}
@@ -110,7 +109,6 @@ public class GUI1 implements CustomGUISecondary {
 	 */
 	public GUI1(Player p, int invSize) {
 		this.inv = Bukkit.createInventory(p, invSize);
-		this.allowedItems = new LinkedList<ItemStack>();
 		this.player = p;
 		this.initializeItems(EMPTY_SLOT_ITEM, EXIT_BUTTON);
 	}
@@ -122,7 +120,6 @@ public class GUI1 implements CustomGUISecondary {
 	 */
 	public GUI1(Player p) {
 		this.inv = Bukkit.createInventory(p, DEFAULT_SIZE, p.getDisplayName() + "'s Waypoints");
-		this.allowedItems = new LinkedList<ItemStack>();
 		this.player = p;
 		this.initializeItems(EMPTY_SLOT_ITEM, EXIT_BUTTON);
 	}
@@ -151,12 +148,13 @@ public class GUI1 implements CustomGUISecondary {
 	@Override
 	public void advanceItem(int index) {
 		ItemStack currItem = this.inv.getItem(index);
-		int listIndex = allowedItems.indexOf(currItem);
+		int listIndex = allowedItems.indexOf(currItem.getType());
 		listIndex++;
 		if (listIndex >= allowedItems.size()) {
 			listIndex = 0;
 		}
-		this.inv.setItem(index, allowedItems.get(listIndex));
+		this.inv.setItem(index,
+				WaypointManager.createItem(allowedItems.get(listIndex), currItem.getItemMeta().getDisplayName()));
 	}
 
 	@Override
@@ -191,9 +189,5 @@ public class GUI1 implements CustomGUISecondary {
 	/*
 	 * Private helper methods -------------------------------------------------
 	 */
-
-	private static void initializeAllowedItems() {
-
-	}
 
 }

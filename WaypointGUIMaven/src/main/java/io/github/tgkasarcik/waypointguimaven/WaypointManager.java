@@ -222,10 +222,6 @@ public class WaypointManager {
 		return new ArrayList<String>(waypointMap.get(p.getUniqueId()).keySet());
 	}
 
-	/*
-	 * Private helper methods -------------------------------------------------
-	 */
-
 	/**
 	 * Creates an {@code ItemStack} object with the specified {@code Material} and
 	 * {@code displayName}.
@@ -234,7 +230,7 @@ public class WaypointManager {
 	 * @param displayName The specified display name
 	 * @return The created ItemStack object
 	 */
-	private static ItemStack createItem(Material material, String displayName) {
+	public static ItemStack createItem(Material material, String displayName) {
 		ItemStack block = new ItemStack(material); // TODO: change this to something else??
 		ItemMeta meta = block.getItemMeta();
 		meta.setDisplayName(ChatColor.RESET + "" + ChatColor.BOLD + displayName);
@@ -246,5 +242,9 @@ public class WaypointManager {
 		block.setItemMeta(meta);
 		return block;
 	}
+	
+	/*
+	 * Private helper methods -------------------------------------------------
+	 */
 
 }

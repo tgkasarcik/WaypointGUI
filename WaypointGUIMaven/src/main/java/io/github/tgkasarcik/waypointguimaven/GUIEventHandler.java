@@ -123,13 +123,15 @@ public class GUIEventHandler implements Listener {
 				player.closeInventory();
 				break;
 
+			/*
+			 * On right click, change current item.
+			 */
 			case RIGHT:
 				// change block
 
 				// TEST
 
-				WaypointManager.getGUI(player).rename("test");
-				player.closeInventory();
+				WaypointManager.getGUI(player).advanceItem(event.getSlot());
 
 				break;
 			default:

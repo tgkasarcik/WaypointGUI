@@ -17,12 +17,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class WaypointGUI extends JavaPlugin {
 
 	/**
-	 * Configuration file
+	 * Configuration file (config.yml)
 	 */
 	public static FileConfiguration config;
 
 	/**
-	 * Data file
+	 * Data file (data.yml)
 	 */
 	public static DataManager data;
 
@@ -35,7 +35,7 @@ public class WaypointGUI extends JavaPlugin {
 		config = this.getConfig();
 		this.saveDefaultConfig();
 		getLogger().info("config.yml successfully initialized!");
-		
+
 		/*
 		 * Initialize data.yml file.
 		 */
@@ -46,13 +46,7 @@ public class WaypointGUI extends JavaPlugin {
 		/*
 		 * Initialize Event Handling.
 		 */
-		Bukkit.getServer().getPluginManager().registerEvents(new GUIEventHandler(this), this);
-
-		/*
-		 * Initialize WaypointManager class.
-		 */
-		WaypointManager.initialize();
-		getLogger().info("Waypoint Manager successfully initialized!");
+		Bukkit.getServer().getPluginManager().registerEvents(new GeneralEventHandler(this), this);
 
 		/*
 		 * In reloads, re-initialize Waypoint GUIs for all online players. During
@@ -61,8 +55,9 @@ public class WaypointGUI extends JavaPlugin {
 		 */
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			WaypointManager.createGUI(p);
+			WaypointManager.loadFromFile(p);
+			getLogger().info("Waypoint GUI loaded for player " + p.getDisplayName());
 		}
-		getLogger().info("Waypoint GUIs loaded for all online players!");
 
 		/*
 		 * Initialize command execution
@@ -81,6 +76,15 @@ public class WaypointGUI extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+
+		/*
+		 * Save Waypoint data for all online players to data.yml when server closes.
+		 */
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			WaypointManager.saveToFile(p);
+			WaypointManager.deleteGUI(p);
+			getLogger().info("Waypoint data successfully saved for player " + p.getDisplayName());
+		}
 
 		getLogger().info("Successfully closed");
 

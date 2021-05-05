@@ -61,8 +61,8 @@ public class WaypointGUI extends JavaPlugin {
 		 */
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			WaypointManager.createGUI(p);
-			getLogger().info("Waypoint GUIs loaded for all online players!");
 		}
+		getLogger().info("Waypoint GUIs loaded for all online players!");
 
 		/*
 		 * Initialize command execution

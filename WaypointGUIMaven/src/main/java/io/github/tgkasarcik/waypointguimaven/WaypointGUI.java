@@ -85,6 +85,12 @@ public class WaypointGUI extends JavaPlugin {
 			WaypointManager.deleteGUI(p);
 			getLogger().info("Waypoint data successfully saved for player " + p.getDisplayName());
 		}
+		
+		/*
+		 * Save config.yml and data.yml files.
+		 */
+		this.saveDefaultConfig();
+		data.saveConfig();
 
 		getLogger().info("Successfully closed");
 

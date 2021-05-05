@@ -38,6 +38,11 @@ public class WaypointManager {
 	 */
 	private static Map<UUID, Map<String, Location>> waypointMap;
 
+	/**
+	 * Local reference to data.yml.
+	 */
+	private static DataManager data;
+
 	/*
 	 * Constructor ------------------------------------------------------------
 	 */
@@ -48,18 +53,18 @@ public class WaypointManager {
 	private WaypointManager() {
 	}
 
+	/**
+	 * Initialize internal representation of {@code this}.
+	 */
+	static {
+		guiMap = new HashMap<UUID, GUI1>();
+		waypointMap = new HashMap<UUID, Map<String, Location>>();
+		data = WaypointGUI.data;
+	}
+
 	/*
 	 * Static methods ---------------------------------------------------------
 	 */
-
-	/**
-	 * Initializes internal representation of {@code this}. This method is required,
-	 * because there is no constructor for this class.
-	 */
-	public static void initialize() {
-		guiMap = new HashMap<UUID, GUI1>();
-		waypointMap = new HashMap<UUID, Map<String, Location>>();
-	}
 
 	/**
 	 * Creates a GUI1 object and location map for designated player, if they have
@@ -147,7 +152,7 @@ public class WaypointManager {
 			/*
 			 * Create block and put it in GUI.
 			 */
-			ItemStack block = createItem(Material.GRASS_BLOCK, name);
+			ItemStack block = createItem(Material.GRASS_BLOCK, name); // TODO: change this??
 			localGUI.setItem(index, block);
 
 			/*
@@ -203,7 +208,7 @@ public class WaypointManager {
 		GUI1 gui = guiMap.remove(u);
 		int index = gui.indexOf(oldName);
 		Material oldMaterial = gui.item(index).getType();
-		
+
 		ItemStack newItem = createItem(oldMaterial, newName);
 		gui.setItem(index, newItem);
 		guiMap.put(u, gui);
@@ -241,7 +246,49 @@ public class WaypointManager {
 		block.setItemMeta(meta);
 		return block;
 	}
-	
+
+	/**
+	 * Loads Waypoint data of specified {@code Player} from data.yml
+	 * 
+	 * @param p specified player
+	 */
+	public static void loadFromFile(Player p) {
+		UUID u = p.getUniqueId();
+
+	}
+
+	/**
+	 * Saves Waypoint data of specified {@code Player} to data.yml
+	 * 
+	 * @param p specified player
+	 */
+	public static void saveToFile(Player p) {
+		UUID u = p.getUniqueId();
+		GUI1 gui = guiMap.remove(u);
+
+		for (Map.Entry<String, Location> entry : waypointMap.get(u).entrySet()) {
+			Location loc = entry.getValue();
+			int itemIndex = gui.indexOf(entry.getKey());
+			Material material = gui.item(itemIndex).getType();
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".world",
+					loc.getWorld().getName());
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".x",
+					loc.getX());
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".y",
+					loc.getY());
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".z",
+					loc.getZ());
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".pitch",
+					loc.getPitch());
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".yaw",
+					loc.getYaw());
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".gui-slot",
+					itemIndex);
+			data.getConfig().set("waypoints." + u.toString() + "." + entry.getKey() + ".gui-material",
+					material.name());
+		}
+	}
+
 	/*
 	 * Private helper methods -------------------------------------------------
 	 */

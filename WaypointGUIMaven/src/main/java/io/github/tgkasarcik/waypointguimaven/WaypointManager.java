@@ -248,7 +248,7 @@ public class WaypointManager {
 	}
 
 	/**
-	 * Loads Waypoint data of specified {@code Player} from data.yml
+	 * Load Waypoint data of specified {@code Player} from data.yml
 	 * 
 	 * @param p specified player
 	 */
@@ -258,7 +258,7 @@ public class WaypointManager {
 	}
 
 	/**
-	 * Saves Waypoint data of specified {@code Player} to data.yml
+	 * Save Waypoint data of specified {@code Player} to data.yml
 	 * 
 	 * @param p specified player
 	 */

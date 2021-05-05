@@ -25,16 +25,6 @@ public class GUI1 implements CustomGUISecondary {
 	private static final int DEFAULT_SIZE = 9;
 
 	/**
-	 * {@code ItemStack} object to store items to be used for empty GUI slots.
-	 */
-	protected static ItemStack EMPTY_SLOT_ITEM;
-
-	/**
-	 * {@code ItemStack} object to store items to be used for GUI exit button.
-	 */
-	protected static ItemStack EXIT_BUTTON;
-
-	/**
 	 * Inventory object to act as GUI
 	 */
 	private Inventory inv;
@@ -49,6 +39,20 @@ public class GUI1 implements CustomGUISecondary {
 	 * Player that owns {@code Inventory} used to represent {@code this}.
 	 */
 	private Player player;
+	
+	/*
+	 * Protected members ------------------------------------------------------
+	 */
+	
+	/**
+	 * {@code ItemStack} object to store items to be used for empty GUI slots.
+	 */
+	protected static ItemStack EMPTY_SLOT_ITEM;
+
+	/**
+	 * {@code ItemStack} object to store items to be used for GUI exit button.
+	 */
+	protected static ItemStack EXIT_BUTTON;
 
 	/*
 	 * Constructors -----------------------------------------------------------

@@ -21,15 +21,27 @@ public class WaypointGUI extends JavaPlugin {
 	 */
 	public static FileConfiguration config;
 
+	/**
+	 * Data file
+	 */
+	public static DataManager data;
+
 	@Override
 	public void onEnable() {
 
 		/*
-		 * Initialize config file
+		 * Initialize config.yml file
 		 */
 		config = this.getConfig();
 		this.saveDefaultConfig();
-		getLogger().info("Config.yml successfully initialized!");
+		getLogger().info("config.yml successfully initialized!");
+		
+		/*
+		 * Initialize data.yml file.
+		 */
+		data = new DataManager(this);
+		data.saveDefaultConfig();
+		getLogger().info("data.yml successfully initialized!");
 
 		/*
 		 * Initialize Event Handling.
@@ -58,7 +70,7 @@ public class WaypointGUI extends JavaPlugin {
 		CommandExecutor commandExecutor = new MainCommandExecutor(this);
 		this.getCommand("w").setExecutor(commandExecutor);
 		this.getCommand("waypoint").setExecutor(commandExecutor);
-		
+
 		/*
 		 * Initialize custom tab completion.
 		 */

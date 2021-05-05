@@ -1,14 +1,13 @@
 package io.github.tgkasarcik.waypointguimaven;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -19,7 +18,7 @@ import net.md_5.bungee.api.ChatColor;
  *
  */
 
-public class GUIEventHandler implements Listener {
+public class GeneralEventHandler implements Listener {
 
 	/**
 	 * Reference to class to register events for
@@ -39,7 +38,7 @@ public class GUIEventHandler implements Listener {
 	 * 
 	 * @param plugin Reference to class to register events for
 	 */
-	public GUIEventHandler(WaypointGUI plugin) {
+	public GeneralEventHandler(WaypointGUI plugin) {
 		this.plugin = plugin;
 	}
 
@@ -47,12 +46,11 @@ public class GUIEventHandler implements Listener {
 	 * Events -----------------------------------------------------------------
 	 */
 
-	@EventHandler
-	public void testWelcomeMessage(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
-		p.sendMessage("Test successful!");
-	}
-
+	/**
+	 * Listen for events inside of Waypoint GUI.
+	 * 
+	 * @param event {@code InventoryClickEvent} object
+	 */
 	@EventHandler
 	public void waypointGUIClick(InventoryClickEvent event) {
 
@@ -127,12 +125,7 @@ public class GUIEventHandler implements Listener {
 			 * On right click, change current item.
 			 */
 			case RIGHT:
-				// change block
-
-				// TEST
-
 				WaypointManager.getGUI(player).advanceItem(event.getSlot());
-
 				break;
 			default:
 				break;
@@ -140,6 +133,30 @@ public class GUIEventHandler implements Listener {
 			}
 
 		}
+	}
+
+	/**
+	 * Load Waypoint data from data.yml for {@code Player} specified by
+	 * {@code PlayerJoinEvent}.
+	 * 
+	 * @param e {@code PlayerJoinEvent} object.
+	 */
+	@EventHandler
+	public void loadPlayerWaypointsOnJoin(PlayerJoinEvent e) {
+		WaypointManager.createGUI(e.getPlayer());
+		WaypointManager.loadFromFile(e.getPlayer());
+	}
+
+	/**
+	 * Save Waypoint data to data.yml and delete {@code CustomGUI} object for
+	 * {@code Player} specified by {@code PlayerQuitEvent}.
+	 * 
+	 * @param e {@code PlayerQuitEvent} object.
+	 */
+	@EventHandler
+	public void savePlayerWaypointsOnQuit(PlayerQuitEvent e) {
+		WaypointManager.saveToFile(e.getPlayer());
+		WaypointManager.deleteGUI(e.getPlayer());
 	}
 
 }

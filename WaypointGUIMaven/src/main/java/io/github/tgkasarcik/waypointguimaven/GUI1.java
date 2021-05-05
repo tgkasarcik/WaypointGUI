@@ -27,12 +27,12 @@ public class GUI1 implements CustomGUISecondary {
 	/**
 	 * {@code ItemStack} object to store items to be used for empty GUI slots.
 	 */
-	public static ItemStack EMPTY_SLOT_ITEM;
+	protected static ItemStack EMPTY_SLOT_ITEM;
 
 	/**
 	 * {@code ItemStack} object to store items to be used for GUI exit button.
 	 */
-	public static ItemStack EXIT_BUTTON;
+	protected static ItemStack EXIT_BUTTON;
 
 	/**
 	 * Inventory object to act as GUI

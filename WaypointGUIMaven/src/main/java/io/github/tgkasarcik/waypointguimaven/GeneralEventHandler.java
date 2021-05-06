@@ -1,6 +1,7 @@
 package io.github.tgkasarcik.waypointguimaven;
 
 import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.md_5.bungee.api.ChatColor;
 
 /**
- * Class to handle events associated with {@code CustomGUI} objects.
+ * Class to handle all events associated with this plugin.
  * 
  * @author T. Kasarcik
  *
@@ -26,12 +27,17 @@ public class GeneralEventHandler implements Listener {
 	@SuppressWarnings("unused")
 	private final WaypointGUI plugin;
 
-	// TODO: make this configurable from config.yml
 	/**
 	 * Boolean variable to store whether teleportation is allowed from within the
 	 * WaypointGUI menu.
 	 */
-	private static boolean teleportationEnabled = true;
+	private static boolean teleportationEnabled;
+
+	/**
+	 * Local reference to {@code FileConfiguration} object from {@code WaypointGUI}
+	 * class.
+	 */
+	private FileConfiguration config;
 
 	/**
 	 * Default constructor
@@ -40,6 +46,8 @@ public class GeneralEventHandler implements Listener {
 	 */
 	public GeneralEventHandler(WaypointGUI plugin) {
 		this.plugin = plugin;
+		this.config = WaypointGUI.config;
+		teleportationEnabled = this.config.getBoolean("waypoints.teleportation-enabled");
 	}
 
 	/*
@@ -49,34 +57,34 @@ public class GeneralEventHandler implements Listener {
 	/**
 	 * Listen for events inside of Waypoint GUI.
 	 * 
-	 * @param event {@code InventoryClickEvent} object
+	 * @param e {@code InventoryClickEvent} object
 	 */
 	@EventHandler
-	public void waypointGUIClick(InventoryClickEvent event) {
+	public void waypointGUIClick(InventoryClickEvent e) {
 
-		Player player = (Player) event.getWhoClicked();
+		Player player = (Player) e.getWhoClicked();
 
-		if (!event.getInventory().equals(WaypointManager.getGUI(player).inventory()))
+		if (!e.getInventory().equals(WaypointManager.getGUI(player).inventory()))
 			return;
-		if (event.getCurrentItem() == null)
+		if (e.getCurrentItem() == null)
 			return;
-		if (event.getCurrentItem().getItemMeta() == null)
+		if (e.getCurrentItem().getItemMeta() == null)
 			return;
-		if (event.getCurrentItem().getItemMeta().getDisplayName() == null)
+		if (e.getCurrentItem().getItemMeta().getDisplayName() == null)
 			return;
 
-		event.setCancelled(true);
+		e.setCancelled(true);
 
 		/*
 		 * Close when exit button is clicked
 		 */
-		if (event.getCurrentItem().equals(GUI1.EXIT_BUTTON)) {
+		if (e.getCurrentItem().equals(GUI1.EXIT_BUTTON)) {
 			player.closeInventory();
 
 			/*
 			 * Close and send message to player when empty slot is clicked.
 			 */
-		} else if (event.getCurrentItem().equals(GUI1.EMPTY_SLOT_ITEM)) {
+		} else if (e.getCurrentItem().equals(GUI1.EMPTY_SLOT_ITEM)) {
 			player.closeInventory();
 			player.sendMessage(ChatColor.RESET + "Use " + ChatColor.LIGHT_PURPLE + "/waypoint create <name>"
 					+ ChatColor.RESET + " to create a new Waypoint!");
@@ -85,8 +93,8 @@ public class GeneralEventHandler implements Listener {
 			 * Do specified action according to type of click for the selected block.
 			 */
 		} else {
-			ClickType click = event.getClick();
-			String locName = ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName());
+			ClickType click = e.getClick();
+			String locName = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
 			Location loc = WaypointManager.getWaypoint(player, locName);
 
 			switch (click) {
@@ -125,7 +133,7 @@ public class GeneralEventHandler implements Listener {
 			 * On right click, change current item.
 			 */
 			case RIGHT:
-				WaypointManager.getGUI(player).advanceItem(event.getSlot());
+				WaypointManager.getGUI(player).advanceItem(e.getSlot());
 				break;
 			default:
 				break;

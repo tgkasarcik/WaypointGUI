@@ -98,23 +98,22 @@ public class GeneralEventHandler implements Listener {
 			Location loc = WaypointManager.getWaypoint(player, locName);
 
 			switch (click) {
-
 			/*
 			 * On left click either teleport player to specified Waypoint, or send player a
 			 * message containing the coordinates of the specified Waypoint, depending on
 			 * the configuration of the plugin.
 			 */
 			case LEFT:
-				// TODO make messages look better
 				if (teleportationEnabled) {
 					player.teleport(loc);
-					player.sendMessage(ChatColor.GOLD + "Teleported to Waypoint " + locName + "!");
+					player.sendMessage(ChatColor.GOLD + "Teleported to Waypoint " + ChatColor.AQUA + locName
+							+ ChatColor.GOLD + "!");
 				} else {
 					String x = Integer.toString(loc.getBlockX());
 					String y = Integer.toString(loc.getBlockY());
 					String z = Integer.toString(loc.getBlockZ());
-					player.sendMessage(
-							ChatColor.GOLD + "Waypoint " + locName + " located at " + x + ", " + y + ", " + z);
+					player.sendMessage(ChatColor.GOLD + "Waypoint " + ChatColor.AQUA + locName + ChatColor.GOLD
+							+ " located at " + x + ", " + y + ", " + z);
 					player.closeInventory();
 				}
 				break;
@@ -125,7 +124,8 @@ public class GeneralEventHandler implements Listener {
 			 */
 			case MIDDLE:
 				WaypointManager.updateWaypoint(player, locName, player.getLocation());
-				player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + locName + "!");
+				player.sendMessage(ChatColor.GOLD + "Successfully updated location of Waypoint " + ChatColor.AQUA
+						+ locName + ChatColor.GOLD + "!");
 				player.closeInventory();
 				break;
 

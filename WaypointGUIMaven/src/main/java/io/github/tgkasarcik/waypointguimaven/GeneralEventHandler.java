@@ -137,9 +137,7 @@ public class GeneralEventHandler implements Listener {
 				break;
 			default:
 				break;
-
 			}
-
 		}
 	}
 
@@ -166,5 +164,4 @@ public class GeneralEventHandler implements Listener {
 		WaypointManager.saveToFile(e.getPlayer());
 		WaypointManager.deleteGUI(e.getPlayer());
 	}
-
 }

@@ -1,11 +1,11 @@
 package io.github.tgkasarcik.waypointguimaven;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,7 +22,12 @@ public class GUI1 implements CustomGUISecondary {
 	/**
 	 * Constant to hold default size of inventory object.
 	 */
-	private static final int DEFAULT_SIZE = 9;
+	private static final int DEFAULT_SIZE;
+
+	/**
+	 * Local reference to {@code FileConfiguration} object from {@code WaypointGUI}.
+	 */
+	private static FileConfiguration config;
 
 	/**
 	 * Inventory object to act as GUI
@@ -39,11 +44,11 @@ public class GUI1 implements CustomGUISecondary {
 	 * Player that owns {@code Inventory} used to represent {@code this}.
 	 */
 	private Player player;
-	
+
 	/*
 	 * Protected members ------------------------------------------------------
 	 */
-	
+
 	/**
 	 * {@code ItemStack} object to store items to be used for empty GUI slots.
 	 */
@@ -62,6 +67,16 @@ public class GUI1 implements CustomGUISecondary {
 	 * Initialize Static variables.
 	 */
 	static {
+
+		/*
+		 * Initialize {@code config}.
+		 */
+		config = WaypointGUI.config;
+
+		/*
+		 * Initialize {@code DEFAULT_SIZE} from config.yml.
+		 */
+		DEFAULT_SIZE = (config.getInt("waypoints.gui.number-of-rows") * 9);
 
 		/*
 		 * Initialize {@code EMPTY_SLOT_ITEM}.
@@ -87,12 +102,15 @@ public class GUI1 implements CustomGUISecondary {
 		 * Initialize {@code allowedItems}
 		 */
 		allowedItems = new ArrayList<Material>();
-		// TODO: change this to load from config.yml
-		allowedItems.add(Material.GRASS_BLOCK);
-		allowedItems.add(Material.STONE);
-		allowedItems.add(Material.SAND);
-		allowedItems.add(Material.ICE);
-		allowedItems.add(Material.TERRACOTTA);
+		List<String> tempList = config.getStringList("waypoints.gui.allowed-items");
+		for (String s : tempList) {
+			try {
+				allowedItems.add(Material.valueOf(s));
+			} catch (IllegalArgumentException e) {
+				Bukkit.getLogger().warning("[WaypointGUI] Error loading allowed gui material data from config.yml: " + s
+						+ " is not a valid material! Ignoring it.");
+			}
+		}
 	}
 
 	/**

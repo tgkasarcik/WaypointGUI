@@ -17,4 +17,14 @@ WaypointGUI is a custom Minecraft Server Plugin for Spigot Servers.
 
 **Screenshots**
 
-https://user-images.githubusercontent.com/77713266/166866342-48b40fd2-a21c-4dee-bd7a-2e173bbf1634.png
+Empty GUI Menu
+
+<img src="https://user-images.githubusercontent.com/77713266/166866342-48b40fd2-a21c-4dee-bd7a-2e173bbf1634.png" alt="Empty GUI" title="Empty GUI">
+
+Menu Tooltip
+
+<img src="https://user-images.githubusercontent.com/77713266/166866363-6d6889b5-f61b-4e5c-9727-8b0493a44ae3.png" alt="Menu Tooltip" title="Menu Tooltip">
+
+Example GUI
+
+<img src="https://user-images.githubusercontent.com/77713266/166866365-7518befc-3383-4bc5-9c4e-216a589a1826.png" alt="Menu Tooltip" title="Menu Tooltip">

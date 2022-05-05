@@ -5,7 +5,7 @@ WaypointGUI is a custom Minecraft Server Plugin for Spigot Servers.
 1.16.5
 
 **Features**
-  - Players can save up to 8 (default) waypoints around world in GUI menu
+  - Players can save up to 8 (default amount) waypoints around world in GUI menu
   - Players can customize block, name, and location of each waypoint
   - Players can teleport to waypoint or have coordinates displayed, depending on config settings
   - Server operators have full control over teleportation permissions, possible GUI blocks, maximum number of waypoints, and more.

@@ -1,5 +1,5 @@
 # WaypointGUI
-WaypointGUI is a custom Minecraft Server Plugin for Spigot Servers.
+WaypointGUI is a location management plugin for Spigot Servers.
 
 **Minecraft Version**
 1.16.5

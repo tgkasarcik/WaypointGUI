@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # WaypointGUI
 WaypointGUI is a location management plugin for Spigot Servers.
 
@@ -31,6 +30,3 @@ Menu Tooltip
 Example GUI
 
 <img src="https://user-images.githubusercontent.com/77713266/166866365-7518befc-3383-4bc5-9c4e-216a589a1826.png" alt="Menu Tooltip" title="Menu Tooltip">
-=======
-# WaypointGUI
->>>>>>> origin/main

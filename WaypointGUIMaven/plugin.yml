@@ -1,0 +1,15 @@
+name: WaypointGUI
+main: io.github.tgkasarcik.waypointguimaven.WaypointGUI
+version: 1.0
+api-version: 1.16
+commands:
+     w:
+          description: Displays your Waypoint menu.
+          usage: /w
+          permission: WaypointGUI.w
+          permission-message: You do not have the WaypointGUI.w permission.
+     waypoint:
+          description: Allows creation and deletion of Waypoints.
+          usage: /waypoint (create,delete, update) <name>
+          permission: WaypointGUI.waypoint
+          permission-message: You do not have the WaypointGUI.waypoint permission.
